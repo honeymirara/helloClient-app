@@ -2,7 +2,7 @@
   "name": "my-hooks-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "hhttps://honeymirara.github.io/helloClient-app",
+  "homepage": "https://honeymirara.github.io/helloClient-app",
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.1",
     "@testing-library/dom": "^10.4.0",

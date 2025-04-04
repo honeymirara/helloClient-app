@@ -19,9 +19,9 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   const isParentActive = hasSubItems && activeSubItemId !== undefined;
 
   const handleClick = () => {
-    if (hasSubItems && !isCollapsed) {
+    if (hasSubItems) {
       setIsExpanded(!isExpanded);
-    } else if (!hasSubItems) {
+    } else {
       onItemClick(id);
     }
   };
@@ -30,11 +30,17 @@ export const MenuItem: React.FC<MenuItemProps> = ({
 
   return (
     <div 
-      className="relative"
+      className="relative group"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={(e) => {
+        // Проверяем, не навели ли мы на подменю
+        const relatedTarget = e.relatedTarget as HTMLElement;
+        const isHoveringSubmenu = relatedTarget?.closest('.submenu-container');
+        if (!isHoveringSubmenu) {
+          setIsHovered(false);
+        }
+      }}
     >
-      {/* Основной пункт меню */}
       <div
         role="menuitem"
         onClick={handleClick}
@@ -48,7 +54,6 @@ export const MenuItem: React.FC<MenuItemProps> = ({
           ${isCollapsed ? 'justify-center' : ''}
         `}
       >
-        {/* Иконка */}
         <span className={`
           text-lg
           ${isCollapsed ? '' : 'mr-3'}
@@ -57,14 +62,12 @@ export const MenuItem: React.FC<MenuItemProps> = ({
           {icon}
         </span>
 
-        {/* Текст и стрелка */}
         {!isCollapsed && (
           <>
             <span className="flex-1 text-sm font-medium">{children}</span>
             {hasSubItems && (
               <span className={`
-                ml-2
-                transition-transform duration-200
+                ml-2 transition-transform duration-200
                 ${isExpanded ? 'rotate-90' : ''}
               `}>
                 ▶
@@ -74,36 +77,30 @@ export const MenuItem: React.FC<MenuItemProps> = ({
         )}
       </div>
 
-      {/* Подменю */}
       {hasSubItems && showSubmenu && (
         <div 
           className={`
+            submenu-container
             overflow-hidden
             transition-all duration-200
             ${isCollapsed 
               ? `
                 absolute left-full top-0 
-                bg-white shadow-lg rounded-lg
+                bg-white shadow-lg rounded-lg 
                 min-w-[200px] border
-                mt-0
+                hover:block
               ` 
               : 'bg-blue-50/50'
             }
           `}
-          style={{
-            // Позиционируем подменю рядом с пунктом меню в свёрнутом состоянии
-            ...(isCollapsed && {
-              top: '0',
-              left: '100%',
-              marginLeft: '0.5rem' // небольшой отступ от основного меню
-            })
-          }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
           {subItems.map((subItem) => (
             <div
               key={subItem.id}
               onClick={(e) => {
-                e.stopPropagation(); // Предотвращаем всплытие события
+                e.stopPropagation();
                 onItemClick(id, subItem.id);
               }}
               className={`

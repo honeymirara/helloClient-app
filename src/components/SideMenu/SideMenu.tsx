@@ -27,7 +27,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
   }, []);
 
   return (
-    <SideMenuContext.Provider value={{ 
+    <SideMenuContext.Provider value={{
       isCollapsed: isMobile ? false : isCollapsed,
       isMobile,
       isOpen,
@@ -35,18 +35,18 @@ export const SideMenu: React.FC<SideMenuProps> = ({
     }}>
       {/* Мобильная кнопка меню */}
       {isMobile && (
-  <button
-    onClick={() => setIsOpen(!isOpen)}
-    className="fixed left-4 top-[300px] z-50 w-10 h-10 
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="fixed left-4 top-[300px] z-50 w-10 h-10 
                bg-white rounded-full shadow-lg 
                flex items-center justify-center
                hover:bg-gray-50 transition-colors
                border border-gray-200"
-    aria-label={isOpen ? 'Закрыть меню' : 'Открыть меню'}
-  >
-    {isOpen ? '✕' : '☰'}
-  </button>
-)}
+          aria-label={isOpen ? 'Закрыть меню' : 'Открыть меню'}
+        >
+          {isOpen ? '✕' : '☰'}
+        </button>
+      )}
 
       {/* Основное меню */}
       <div className={`
@@ -74,7 +74,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({
 
       {/* Оверлей для мобильной версии */}
       {isMobile && isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 z-30"
           onClick={() => setIsOpen(false)}
         />

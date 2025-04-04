@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/honeymirara/helloClient-app/static/css/main.d80a7181.css",
+    "main.js": "/honeymirara/helloClient-app/static/js/main.c56012fd.js",
+    "index.html": "/honeymirara/helloClient-app/index.html",
+    "main.d80a7181.css.map": "/honeymirara/helloClient-app/static/css/main.d80a7181.css.map",
+    "main.c56012fd.js.map": "/honeymirara/helloClient-app/static/js/main.c56012fd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d80a7181.css",
+    "static/js/main.c56012fd.js"
+  ]
+}

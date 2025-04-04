@@ -1,23 +1,27 @@
 import { ReactNode } from 'react';
 
-// Тип для элемента подменю
 export interface SubMenuItem {
   id: string;
   label: string;
   icon?: ReactNode;
 }
 
-// Основные пропсы пункта меню
 export interface MenuItemProps {
+  id: string;
   children: ReactNode;
   icon?: ReactNode;
   isActive?: boolean;
-  onClick?: () => void;
-  subItems?: SubMenuItem[];    // Добавляем подменю
+  subItems?: SubMenuItem[];
+  activeSubItemId?: string;
+  onItemClick: (itemId: string, subItemId?: string) => void;
 }
 
-// Пропсы основного компонента меню
 export interface SideMenuProps {
   children: ReactNode;
   isCollapsed?: boolean;
+  onCollapsedChange?: (isCollapsed: boolean) => void;
+}
+
+export interface SideMenuContextType {
+  isCollapsed: boolean;
 }

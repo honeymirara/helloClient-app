@@ -2,7 +2,10 @@ import { createContext, useContext } from 'react';
 import { SideMenuContextType } from './types';
 
 const SideMenuContext = createContext<SideMenuContextType>({
-  isCollapsed: false
+  isCollapsed: false,
+  isMobile: false,
+  isOpen: false,
+  setIsOpen: () => {}
 });
 
 export const useSideMenu = () => {

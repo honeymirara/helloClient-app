@@ -25,3 +25,10 @@ export interface SideMenuProps {
 export interface SideMenuContextType {
   isCollapsed: boolean;
 }
+
+export interface SideMenuContextType {
+  isCollapsed: boolean;
+  isMobile: boolean;
+  isOpen: boolean;
+  setIsOpen: (value: boolean) => void;
+}
